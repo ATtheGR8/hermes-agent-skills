@@ -2,7 +2,7 @@
 
 Co-created by **ATtheGR8** & **Hermes Agent**. Copyright (c) 2026 Avery Thompson.
 
-Canonical bar for **issue bodies, PR bodies, and PR/issue comments** for this install.
+Canonical bar for **issue bodies, PR bodies, and PR/issue comments**.
 
 **Not this skill:** `gh`/API lifecycle → bundled `github-issues` / `github-pr-workflow`; diff review mechanics → `github-code-review`; pre-commit gates → `requesting-code-review`.
 

@@ -8,15 +8,23 @@ platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [GitHub, Issues, Pull-Requests, Writing, Review, Verification]
-    related_skills: [github-issues, github-pr-workflow, github-code-review, requesting-code-review, hermes-user-ops]
+    related_skills: [github-issues, github-pr-workflow, github-code-review, requesting-code-review]
 ---
 <!-- skill: github-expert-writing — Expert evidence-backed GitHub issue/PR prose. -->
 
 # GitHub expert writing
 
+**ATtheGR8** & **Hermes Agent** — co-created. Maintained by ATtheGR8.
+Copyright (c) 2026 Avery Thompson. Not an official Nous Research / Hermes product skill.
+
+Worked example (**structure only**): [NousResearch/hermes-agent#65982](https://github.com/NousResearch/hermes-agent/pull/65982) —
+real PR plus verification / correction / author-reply thread.
+**Inspired by that review quality.** Copy the **method**, not the product feature.
+
 Single package for **public GitHub prose**: issue bodies, PR bodies, and substantial
-comments (verification, correction, response-to-review). Encodes an evidence-first bar (see inspiration link above):
+comments (verification, correction, response-to-review). Encodes an evidence-first bar:
 problem first, mechanism, evidence, real tests, fair scope, human voice.
+
 
 ## When to use
 
