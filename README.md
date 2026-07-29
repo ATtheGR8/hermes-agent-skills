@@ -17,6 +17,7 @@ This is **not** an official Nous Research / Hermes product skill pack unless a s
 | Skill | Description |
 |-------|-------------|
 | [github-expert-writing](skills/github-expert-writing/) | Evidence-first GitHub issues, PRs, and review comments |
+| [it-architect](skills/it-architect/) | IT solutions architecture: ADRs, options, plans, reviews (+ EA-lite) |
 
 ## Install (primary)
 
@@ -24,8 +25,13 @@ Clone this repo, then copy the skill you want into your Hermes skills directory:
 
 ```bash
 git clone https://github.com/ATtheGR8/hermes-agent-skills.git
-cp -R hermes-agent-skills/skills/github-expert-writing \
-  ~/.hermes/skills/github/github-expert-writing
+cd hermes-agent-skills
+
+# GitHub issue/PR prose
+cp -R skills/github-expert-writing ~/.hermes/skills/github/github-expert-writing
+
+# IT solutions architecture (ADRs / plans / reviews)
+cp -R skills/it-architect ~/.hermes/skills/devops/it-architect
 ```
 
 Named profiles use `~/.hermes/profiles/<name>/skills/` instead of `~/.hermes/skills/`.
