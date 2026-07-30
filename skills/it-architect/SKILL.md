@@ -1,7 +1,7 @@
 ---
 name: it-architect
 description: "Use when IT/systems architecture, ADRs, or design reviews."
-version: 1.0.0
+version: 1.1.0
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -28,7 +28,7 @@ Load **before** drafting:
 - Options analysis / recommendation with rejected paths
 - Implementation plans tied to an ADR
 - Architecture review of an existing design or "is this still valid?"
-- Decision gates for the user (ranked choices, reply 1/2/3)
+- Decision gates for the user (ranked choices; full option text in body as 1/2/3)
 - Optional: capability map / view framing (EA-lite) for multi-capability or enterprise audience
 
 **Always ask** whether an ADR is wanted when a new project is identified (unless already ordered).
@@ -54,6 +54,7 @@ Load **before** drafting:
 - **Open questions are gates** — do not pretend implementation is unblocked
 - **Edits should shorten** when possible; no essay without a decision
 - **No secrets** in ADRs (IDs, tokens, webhooks, keys)
+- **Diagrams (required on every ADR):** (1) markdown flowchart — Mermaid preferred, checked in as `.mmd` and embedded in the ADR; (2) **diagrams.net / draw.io** `.drawio` XML (editable in app.diagrams.net or VS Code Draw.io). Include a shared **object legend** and **edge legend** so every box/zone/arrow meaning is explicit and visible. Prose decisions remain SoT; diagrams stay consistent with Dn.
 - **EA-lite is optional** — default path is SA ADR/plan/review
 
 ## Genre → template
@@ -70,14 +71,15 @@ Load **before** drafting:
 
 ## Relationship to `architecture-adr`
 
-If your install still has a thin `architecture-adr` skill, treat it as a redirect here.
-Prefer **`it-architect`** for all new architecture work.
+That name is a **stub** that redirects here. Prefer `it-architect` for all new work.
 
 ## Maintenance
 
 - Source of truth for the **public** package: this git repository
 - Improve via PR/commit; copy into `~/.hermes/skills/` (or a profile skills dir) to use
 - Prefer not forking the bar into unrelated bundled skills
+- Private multi-profile installs may keep a separate SoT; re-export after redaction
+
 
 ## Completion before handoff
 
@@ -86,6 +88,9 @@ Prefer **`it-architect`** for all new architecture work.
 - [ ] Non-goals + open questions listed or explicitly none
 - [ ] Path to artifact given; status **Proposed** until accepted
 - [ ] No secrets
+- [ ] ADR diagrams: Mermaid (or equivalent) flowchart embedded + `.mmd` when repo has `diagrams/`
+- [ ] ADR diagrams: diagrams.net `.drawio` present and openable
+- [ ] Object legend + edge legend define every visible shape/arrow
 
 ## Common pitfalls
 

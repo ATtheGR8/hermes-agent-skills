@@ -19,6 +19,38 @@
 | **D1** | … |
 | **D2** | … |
 
+## 2b. Diagrams (required)
+
+<!-- Every ADR needs BOTH: -->
+<!-- 1) Mermaid (or equivalent) markdown flowchart — embed below + optional diagrams/*.mmd -->
+<!-- 2) diagrams.net / draw.io .drawio file — link path; same objects as Mermaid -->
+<!-- Include object legend + edge legend; labels must be clearly visible -->
+
+### Object legend
+
+| Object / zone | What it is | Where | Notes |
+|---------------|------------|-------|-------|
+| … | | | |
+
+### Edge legend
+
+| Style / label | Meaning |
+|---------------|---------|
+| Solid | Primary path |
+| Dashed | Optional / deferred / escalate-only |
+
+### Markdown flowchart
+
+```mermaid
+flowchart TD
+  A[…] --> B[…]
+```
+
+### diagrams.net
+
+- File: `diagrams/<slug>.drawio`
+- Open: app.diagrams.net or Draw.io editor
+
 ## 3. Non-goals
 
 - …

@@ -33,6 +33,11 @@ Diagrams are supporting evidence (`architecture-diagram`); **decisions in prose 
 10. **Safety** — no secrets, tokens, private URLs, or credential material in the artifact.
 11. **Depth proportional to blast radius** — see guide below.
 12. **Shorten on edit** — new facts replace prose; do not sediment forever.
+13. **Diagrams on every ADR** — ship **both**:
+    - **Markdown flowchart** (Mermaid preferred): embed in the ADR and keep a sibling `.mmd` under a `diagrams/` folder next to the ADR when the repo has one.
+    - **diagrams.net (draw.io)** `.drawio` XML: same topology, openable in [app.diagrams.net](https://app.diagrams.net) or the Draw.io editor extension.
+    - **Object legend + edge legend** in the ADR: every box, zone, and arrow style named and defined (what / where / notes). Labels on shapes must be readable without hovering.
+    - Keep Mermaid and draw.io **name-aligned** when components rename; prose Dn remains SoT if they drift.
 
 ## Depth guide
 
@@ -82,8 +87,8 @@ Diagrams are supporting evidence (`architecture-diagram`); **decisions in prose 
 
 Patterns to emulate (method only — never paste host secrets or private IDs):
 
-- **Tight ops ADR:** tiered decisions, single transport, success/failure policy, clear non-goals
-- **Heavy platform ADR:** live audit table, explicitly unverified table, D1–Dn, P0 protect-first, open gates
+- Tight ops ADR: tiered decisions, single transport, success policy, non-goals
+- Heavy platform ADR: live audit table, unverified table, D1–Dn, tiers, P0 protect-first, open gates
 
 Copy the **method**, not environment-specific facts, into new work.
 
@@ -94,3 +99,6 @@ Copy the **method**, not environment-specific facts, into new work.
 - [ ] Knows what is blocked on whom
 - [ ] Knows where the file lives
 - [ ] No secrets
+- [ ] Markdown flowchart present (Mermaid embed + `.mmd` when repo has `diagrams/`)
+- [ ] diagrams.net `.drawio` present and openable
+- [ ] Object legend + edge legend define every visible shape/arrow
