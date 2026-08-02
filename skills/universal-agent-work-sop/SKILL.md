@@ -1,7 +1,7 @@
 ---
 name: universal-agent-work-sop
-description: "Use for all agent work: triage, plan, act, verify."
-version: 1.0.0
+description: "Use for all agent work: triage, plan, act, verify, sustain."
+version: 1.0.1
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]

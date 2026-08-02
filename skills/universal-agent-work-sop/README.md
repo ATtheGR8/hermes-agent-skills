@@ -39,7 +39,7 @@ skill_view(name='universal-agent-work-sop')
 Hermes does not auto-run every skill every turn. To nudge the agent, add a short line to your user profile / house rules, for example:
 
 ```text
-Work SOP (standard operating procedures): skill universal-agent-work-sop — material work; triage trivial/standard/high-blast; investigate before ask; gate non-trivial; verify before done.
+Work SOP: skill universal-agent-work-sop — for all agent work, load skill first; triage trivial/standard/high-blast; investigate before ask; gate non-trivial; verify before done.
 ```
 
 Keep the full procedure in the skill — do not paste the whole SOP (standard operating procedures) into USER/SOUL/AGENTS.
