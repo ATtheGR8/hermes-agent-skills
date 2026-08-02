@@ -18,6 +18,7 @@ This is **not** an official Nous Research / Hermes product skill pack unless a s
 |-------|-------------|
 | [github-expert-writing](skills/github-expert-writing/) | Evidence-first GitHub issues, PRs, and review comments |
 | [it-architect](skills/it-architect/) | IT solutions architecture: ADRs, options, plans, reviews (+ EA-lite) |
+| [universal-agent-work-sop](skills/universal-agent-work-sop/) | Work SOP (standard operating procedures): triage, plan, act, verify, sustain |
 
 ## Install (primary)
 
@@ -32,6 +33,9 @@ cp -R skills/github-expert-writing ~/.hermes/skills/github/github-expert-writing
 
 # IT solutions architecture (ADRs / plans / reviews)
 cp -R skills/it-architect ~/.hermes/skills/devops/it-architect
+
+# Work SOP = standard operating procedures (triage / gates / verify)
+cp -R skills/universal-agent-work-sop ~/.hermes/skills/devops/universal-agent-work-sop
 ```
 
 Named profiles use `~/.hermes/profiles/<name>/skills/` instead of `~/.hermes/skills/`.
@@ -40,6 +44,7 @@ Restart or start a new Hermes session so the skill index picks it up. Load with:
 
 ```text
 skill_view(name='github-expert-writing')
+skill_view(name='universal-agent-work-sop')
 ```
 
 ### Zip download
