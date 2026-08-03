@@ -20,6 +20,8 @@ This is **not** an official Nous Research / Hermes product skill pack unless a s
 | [it-architect](skills/it-architect/) | IT solutions architecture: ADRs, options, plans, reviews (+ EA-lite) |
 | [universal-agent-work-sop](skills/universal-agent-work-sop/) | Work SOP (standard operating procedures): triage, plan, act, verify, sustain |
 | [qa-vision](skills/qa-vision/) | Agent first-pass visual QA before human review of images/UI |
+| [agent-knowledge-review](skills/agent-knowledge-review/) | Review agent skills/memory for durable retention (90-day filter) |
+| [agent-memory-budget](skills/agent-memory-budget/) | Always-on memory pressure: inventory, compress (Q1–Q3), or raise |
 
 ## Install (primary)
 
@@ -40,6 +42,12 @@ cp -R skills/universal-agent-work-sop ~/.hermes/skills/devops/universal-agent-wo
 
 # Agent first-pass visual QA
 cp -R skills/qa-vision ~/.hermes/skills/software-development/qa-vision
+
+# Durable knowledge keep/reject/destination review
+cp -R skills/agent-knowledge-review ~/.hermes/skills/devops/agent-knowledge-review
+
+# Always-on memory budget / compress vs raise
+cp -R skills/agent-memory-budget ~/.hermes/skills/devops/agent-memory-budget
 ```
 
 Named profiles use `~/.hermes/profiles/<name>/skills/` instead of `~/.hermes/skills/`.
@@ -50,6 +58,8 @@ Restart or start a new Hermes session so the skill index picks it up. Load with:
 skill_view(name='github-expert-writing')
 skill_view(name='universal-agent-work-sop')
 skill_view(name='qa-vision')
+skill_view(name='agent-knowledge-review')
+skill_view(name='agent-memory-budget')
 ```
 
 ### Zip download
