@@ -20,8 +20,6 @@ metadata:
 ---
 <!-- skill: universal-agent-work-sop — Universal work SOP (standard operating procedures): triage, act, verify, sustain. -->
 
-<!-- skill: universal-agent-work-sop — Universal work SOP (standard operating procedures): triage, act, verify, sustain. -->
-
 # Universal Agent Work SOP (Standard Operating Procedures)
 
 **SOP** means **standard operating procedures** — the repeatable work discipline in this skill (triage → gate → act → verify → sustain). After this definition, “SOP” refers to that discipline.
