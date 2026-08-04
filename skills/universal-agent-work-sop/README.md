@@ -14,7 +14,7 @@ Copyright (c) 2026 Avery Thompson.
 
 ## What you get
 
-- `SKILL.md` — full standard operating procedures: always-on principles, trivial/standard/high-blast triage, concise and full work gates, specialist routing, verification report, pitfalls
+- `SKILL.md` — full standard operating procedures: always-on principles, **skill load / phase re-entry**, trivial/standard/high-blast triage, concise and full work gates, specialist routing, verification report, pitfalls
 
 Pairs well with skills in this monorepo (`it-architect`, `github-expert-writing`) and common Hermes skills (`plan`, `systematic-debugging`, `test-driven-development`, etc.) when those are installed.
 
@@ -39,7 +39,7 @@ skill_view(name='universal-agent-work-sop')
 Hermes does not auto-run every skill every turn. To nudge the agent, add a short line to your user profile / house rules, for example:
 
 ```text
-Work SOP: skill universal-agent-work-sop — for all agent work, load skill first; triage trivial/standard/high-blast; investigate before ask; gate non-trivial; verify before done.
+Work SOP: skill universal-agent-work-sop — for all agent work, load skill first; re-load on design→execute; triage trivial/standard/high-blast; investigate before ask; gate non-trivial; verify before done.
 ```
 
 Keep the full procedure in the skill — do not paste the whole SOP (standard operating procedures) into USER/SOUL/AGENTS.

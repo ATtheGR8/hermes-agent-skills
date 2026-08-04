@@ -1,7 +1,7 @@
 ---
 name: universal-agent-work-sop
 description: "Use for all agent work: triage, plan, act, verify, sustain."
-version: 1.0.1
+version: 1.1.0
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -20,6 +20,8 @@ metadata:
 ---
 <!-- skill: universal-agent-work-sop — Universal work SOP (standard operating procedures): triage, act, verify, sustain. -->
 
+<!-- skill: universal-agent-work-sop — Universal work SOP (standard operating procedures): triage, act, verify, sustain. -->
+
 # Universal Agent Work SOP (Standard Operating Procedures)
 
 **SOP** means **standard operating procedures** — the repeatable work discipline in this skill (triage → gate → act → verify → sustain). After this definition, “SOP” refers to that discipline.
@@ -30,7 +32,7 @@ metadata:
 
 Apply this discipline to **all agent work**: research, planning, architecture, implementation, fixes, troubleshooting, testing, configuration, operations, documentation, data work, integrations, delegation, and sustainment.
 
-The SOP (standard operating procedures) is always-on as a set of principles. It is **not** permission to force a full proposal on every conversational turn. Scale visible ceremony to risk. The objective is to prevent avoidable rework, undisclosed assumptions, unsafe action, silent scope drift, and claims of completion without evidence.
+The SOP (standard operating procedures) is always-on as a set of **principles**. The **full skill body is not sticky** after one load earlier in a conversation — see **Skill load and phase re-entry**. It is **not** permission to force a full proposal on every conversational turn. Scale visible ceremony to risk. The objective is to prevent avoidable rework, undisclosed assumptions, unsafe action, silent scope drift, and claims of completion without evidence.
 
 ## Scope and precedence
 
@@ -70,6 +72,31 @@ Classify the task before deciding how much visible planning is needed.
 | **High-blast** | Auth, credentials, money, deletion, migrations, data mutation, production config, external side effects, sensitive data, public API/schema, multi-node architecture, irreversible work, broad permissions, or high uncertainty | Produce the full work gate. Include safety/rollback/rollout evidence and trigger the relevant ADR, decision-gate, or domain procedure before action. |
 
 If classification is uncertain, classify upward until evidence justifies a lower-risk path. A small diff is not proof of low risk.
+
+## Skill load and phase re-entry
+
+**Principles** in this skill are always-on once the agent is following the SOP. The **full skill body is not sticky**: a prior skill load (e.g. `skill_view` or host equivalent) earlier in the conversation does **not** count as loaded for a later phase.
+
+### When to load or re-load this skill
+
+Load (or re-load) this umbrella skill in the **same turn** as the first consequential action when any of these hold:
+
+1. **Phase change** — discuss / design / plan / gate → **execute / apply / mutate**
+2. **Risk upgrade** — trivial → standard or high-blast; or blast radius grows mid-work
+3. **New high-blast surface** — credentials, production or shared config, multi-system rollout, irreversible data/volume changes, external side effects
+4. **Session start of material work** — standard/high-blast work when this skill has not been loaded on the **current turn**
+
+### Umbrella and specialist together
+
+- **Specialist skills do not replace this umbrella.**
+- For standard/high-blast **apply**: load **this skill and** the relevant specialist **before the first mutating tool call** (same turn is fine; umbrella must not be omitted).
+- Specialists own domain steps; this skill owns triage, gate, approval boundary, verification, and sustainment.
+
+### Done when
+
+- [ ] For standard/high-blast apply: this skill was loaded on the **apply turn** before the first mutating command
+- [ ] Specialist (if any) loaded in addition, not instead
+- [ ] Prior “we loaded SOP at kickoff” was **not** used to skip re-entry after a phase change
 
 ## Investigate before asking
 
@@ -113,6 +140,7 @@ Use the concise gate plus the following:
 ## Approval, changes, and implementation
 
 - A direct, unambiguous instruction to execute is approval for the stated scope. Silence is not approval.
+- **Approval authorizes scope; it does not waive skill load/re-entry or verification.** On design → execute, re-load this skill (and the specialist) before the first mutation.
 - Partial approval authorizes only the accepted portion; keep other decisions open.
 - Implement the approved plan. Do not silently change user-visible behavior, scope, risk, data handling, public interfaces, rollout, or acceptance criteria.
 - If new evidence materially changes one of those things, stop, explain the changed fact and impact, recommend a revised path, and wait for the necessary decision.
@@ -122,6 +150,8 @@ For long-running or multi-surface work, preserve the accepted gate and current s
 
 ## Select the specialist, do not duplicate it
 
+Load **this umbrella and** the specialist for standard/high-blast **apply** — never the specialist alone as a substitute for this skill. This SOP chooses and sequences specialists; it does not copy their procedures.
+
 Load specialists **when installed**. Names below are common Hermes/community skills; substitute local equivalents if your install differs.
 
 | Work condition | Load / follow |
@@ -130,13 +160,12 @@ Load specialists **when installed**. Names below are common Hermes/community ski
 | A question needs a bounded, throwaway experiment | `spike` |
 | Technical failure or regression | `systematic-debugging` before proposing a fix |
 | New behavior, bug fix, or behavior-preserving refactor | `test-driven-development` where applicable |
-| Architecture, multi-system, security, data, or durable technical decision | `it-architect` (also in this monorepo) |
-| User must choose among ranked paths | `interactive-decision-gates` if available |
+| Architecture, multi-system, security, data, or durable technical decision | `it-architect` (also in this monorepo when using ATtheGR8/hermes-agent-skills) |
+| User must choose among ranked paths | `interactive-decision-gates` if available; otherwise full ranked 1/2/3 text in the body |
 | Heavy implementation with separable tasks | `subagent-driven-development` and/or your delegation skill |
+| Host / multi-profile product ops | your ops skill plus the relevant specialist (not this umbrella alone) |
 | Pre-commit quality review | `requesting-code-review` |
 | Cross-session / cross-surface continuity | your handoff skill or written handoff file |
-
-This SOP chooses and sequences those tools. It does not copy their detailed procedures.
 
 ## Verification and final report
 
@@ -161,6 +190,18 @@ For durable changes, decide whether to update:
 - runbooks, monitoring, alerts, ownership, or support paths;
 - ADRs, decision records, changelogs, and deprecation notes;
 - handoffs and project status.
+
+### Friction capture (after hard implement/debug)
+
+When work was **non-trivial** (roughly 5+ tool calls, repeated failure modes, or a workaround that will recur):
+
+1. Capture **symptom → mitigation** while it is fresh (short; no session narrative dump).
+2. Write it into the **specialist** home (skill, estate script, runbook) — not this umbrella SOP and not MEMORY scrap.
+3. Prefer **patch existing** specialist over a new near-skill.
+4. Point only to the specialist that owns the domain (do not dump session narrative into this umbrella).
+5. **Done when:** a future agent can hit the same class of problem and find the fix without rereading chat.
+
+Do **not** paste dated issue laundry lists into this SOP — they go stale and bloat always-on process.
 
 Review this SOP after avoidable rework, a security or operational incident, repeated researchable questions, repeated mid-implementation stops, a material tool/workflow change, or a periodic quality review. Keep one source of truth; replace stale wording rather than accumulating competing rules.
 
@@ -221,6 +262,11 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 8. **Replacing specialist skills with generic SOP prose.** Select the specialist; do not duplicate it.
 9. **Copying this full procedure into SOUL, USER, AGENTS, or IDEA files.** Keep this skill as the full source of truth; other layers carry only short pointers or local constraints.
 10. **Maintaining a second full copy of the SOP** outside this skill (stale forks drift). Point other docs at the skill name instead of duplicating the body.
+11. **Leaving implement friction only in chat.** Capture symptom→fix in the specialist skill/script; do not archive incident lists in this SOP.
+12. **Dumping project/session issue logs into the umbrella SOP.** Wrong layer; use handoff or specialist sustainment instead.
+13. **Treating an earlier skill load as still active after a phase change.** Design/discuss load does not cover execute/apply — re-load this skill.
+14. **Specialist-only load on apply turns.** Config/ops/debug specialists do not replace umbrella triage/gate/verify; load both.
+15. **Execute momentum skipping re-entry.** A clear “go/apply” is approval for scope — not a waiver of load/re-entry or verification.
 
 ## Verification checklist
 
@@ -228,8 +274,10 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 - [ ] Readily available evidence was inspected before asking questions.
 - [ ] Verified facts, assumptions, and consequential unknowns are distinguished.
 - [ ] Standard/high-blast work has an appropriate gate and required approval.
-- [ ] Relevant specialist skill was selected instead of duplicated.
+- [ ] Standard/high-blast apply: this skill re-loaded on the apply turn before first mutation (earlier session load does not count across phase change).
+- [ ] Relevant specialist skill was selected **in addition to** this umbrella when domain work needs it (not instead).
 - [ ] Material implementation drift was re-gated; safe internal adjustments were disclosed.
 - [ ] Final report includes actual verification and acceptance status.
 - [ ] Sustainment artifacts and residual risk were considered.
+- [ ] Non-trivial friction captured in the specialist home (not only chat / not a SOP laundry list).
 - [ ] No secrets, tokens, or private keys were placed in artifacts or reports.
