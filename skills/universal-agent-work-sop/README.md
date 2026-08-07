@@ -14,9 +14,9 @@ Copyright (c) 2026 Avery Thompson.
 
 ## What you get
 
-- `SKILL.md` — full standard operating procedures: always-on principles, **skill load / phase re-entry**, trivial/standard/high-blast triage, concise and full work gates, specialist routing, verification report, pitfalls
+- `SKILL.md` — full standard operating procedures: always-on principles, **skill load / phase re-entry**, handoff + ADR pair-load triggers (companions **when installed**), trivial/standard/high-blast triage, concise and full work gates, specialist routing, verification report, pitfalls
 
-Pairs well with skills in this monorepo (`it-architect`, `github-expert-writing`) and common Hermes skills (`plan`, `systematic-debugging`, `test-driven-development`, etc.) when those are installed.
+Pairs well with skills in this monorepo (`it-architect`, `interactive-decision-gates`, `github-expert-writing`) and common Hermes skills (`plan`, `systematic-debugging`, `test-driven-development`, etc.) when those are installed.
 
 ## Install
 
@@ -39,10 +39,10 @@ skill_view(name='universal-agent-work-sop')
 Hermes does not auto-run every skill every turn. To nudge the agent, add a short line to your user profile / house rules, for example:
 
 ```text
-Work SOP: skill universal-agent-work-sop — for all agent work, load skill first; re-load on design→execute; triage trivial/standard/high-blast; investigate before ask; gate non-trivial; verify before done.
+Work SOP: skill universal-agent-work-sop — for all agent work, load skill first; re-load on design→execute and on resume/ADR mutate; triage trivial/standard/high-blast; investigate before ask; gate non-trivial; verify before done.
 ```
 
-Keep the full procedure in the skill — do not paste the whole SOP (standard operating procedures) into USER/SOUL/AGENTS.
+Keep the full procedure in the skill — do not paste the whole SOP into USER/SOUL/AGENTS.
 
 ## Scope
 
@@ -50,8 +50,26 @@ Keep the full procedure in the skill — do not paste the whole SOP (standard op
 | ---- | ----- |
 | How to carry any material agent task | Specialist deep procedures (debug, TDD, ADR prose) |
 | Risk-scaled gates and verification | Replacing security platform rules |
-| Choosing which specialist to load | Your private multi-profile estate ops |
+| Choosing which specialist to load | Install-private multi-profile estate ops |
+
+## Companions (recommended, not required)
+
+| Skill | Role if installed |
+|---|---|
+| `it-architect` | ADR / design-package specialist pair-load |
+| `interactive-decision-gates` | Full menu contract for multi-option gates |
+| Continuity/handoff skill (any) | Resume/park/write pair-load |
+
+This skill is useful **alone**. Missing companions reduce specialization, not basic triage/gate/verify.
+
+## Version
+
+Public **1.2.1** (estate lineage; portable companion language).
 
 ## Security
 
 Documentation only. No API keys required. Do not put secrets into gates, reports, or commits.
+
+## License
+
+MIT (see repository root [LICENSE](../../LICENSE)).

@@ -1,7 +1,7 @@
 ---
 name: universal-agent-work-sop
 description: "Use for all agent work: triage, plan, act, verify, sustain."
-version: 1.1.0
+version: 1.2.1
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -16,15 +16,16 @@ metadata:
       - requesting-code-review
       - subagent-driven-development
       - it-architect
+      - architecture-adr
       - interactive-decision-gates
 ---
 <!-- skill: universal-agent-work-sop — Universal work SOP (standard operating procedures): triage, act, verify, sustain. -->
 
 # Universal Agent Work SOP (Standard Operating Procedures)
 
-**SOP** means **standard operating procedures** — the repeatable work discipline in this skill (triage → gate → act → verify → sustain). After this definition, “SOP” refers to that discipline.
-
 **Credits:** ATtheGR8 & Hermes Agent (co-created). Maintained by ATtheGR8. Copyright (c) 2026 Avery Thompson. **Not** an official Nous Research / Hermes product skill.
+
+**SOP** means **standard operating procedures** — the repeatable work discipline in this skill (triage → gate → act → verify → sustain). After this definition, “SOP” refers to that discipline.
 
 ## Purpose
 
@@ -45,7 +46,7 @@ Apply instructions in this order when they conflict:
 5. This SOP as the default work lifecycle.
 6. Specialist skills for the selected work path.
 
-`SOUL.md` (if present) owns identity and tone. `AGENTS.md` and project charter files own workspace-specific rules and goals. This SOP owns how an agent carries work from intent through verification and sustainment.
+Identity/tone files own persona. Project agent-rules and charter files own workspace-specific rules and goals. This SOP owns how an agent carries work from intent through verification and sustainment.
 
 ## Always-on principles
 
@@ -75,26 +76,51 @@ If classification is uncertain, classify upward until evidence justifies a lower
 
 **Principles** in this skill are always-on once the agent is following the SOP. The **full skill body is not sticky**: a prior skill load (e.g. `skill_view` or host equivalent) earlier in the conversation does **not** count as loaded for a later phase.
 
+### Actor-local load (MoA / multi-agent)
+
+Skill load is **actor-local**: only the agent that will run tools/mutations counts. A planner, advisor, parallel MoA branch, or prior model turn that called `skill_view` does **not** satisfy load for the **executor**. Prefer “loaded **before the first substantive tool call or mutation** by this actor” over a fuzzy “same wall-clock turn” alone when roles are split.
+
 ### When to load or re-load this skill
 
-Load (or re-load) this umbrella skill in the **same turn** as the first consequential action when any of these hold:
+Load (or re-load) this umbrella skill **before the first substantive tool call or mutation by this actor** when any of these hold:
 
 1. **Phase change** — discuss / design / plan / gate → **execute / apply / mutate**
 2. **Risk upgrade** — trivial → standard or high-blast; or blast radius grows mid-work
 3. **New high-blast surface** — credentials, production or shared config, multi-system rollout, irreversible data/volume changes, external side effects
 4. **Session start of material work** — standard/high-blast work when this skill has not been loaded on the **current turn**
+5. **Handoff continuity** — user says `resume` / `resume <hint>` / `resume last` / park / write handoff (or pastes a handoff path): load **this skill with** the install’s **continuity/handoff skill when installed**. A handoff is **context, not authority** for live state and new mutations; **durable locks** in the file may still carry (do not re-open without cause). Not a prior skill load. Domain specialists load **in addition**.
+6. **Durable decision artifacts** — author, revise, Accept, Reject, or multi-file design package work (ADR + plan + runbook + diagrams, architecture decision, options analysis): load **this skill**; also load `it-architect` **when installed** before the first mutation. Classify at least **standard**. Prefer the real architecture skill over any ADR **stub/redirect** name. If no architecture skill is installed, keep ADR work under this SOP’s standard/high-blast gates and any templates the user provides.
+7. **Stub / redirect skills** — if the selected skill says “load X”, “absorbed into X”, or is only a redirect: load **this umbrella and the real target X** in the same turn. A stub load alone is **not** a completed specialist load.
 
 ### Umbrella and specialist together
 
 - **Specialist skills do not replace this umbrella.**
 - For standard/high-blast **apply**: load **this skill and** the relevant specialist **before the first mutating tool call** (same turn is fine; umbrella must not be omitted).
 - Specialists own domain steps; this skill owns triage, gate, approval boundary, verification, and sustainment.
+- **Redirects:** follow the target skill’s body; do not stop after reading the stub.
+
+### Material entry registry (pair-load — not exhaustive)
+
+| Entry | Load before first mutation |
+|---|---|
+| Handoff resume / park / write | this skill + continuity/handoff skill when installed (+ domain) |
+| ADR / architecture decision / multi-file design package | this skill + `it-architect` **when installed** (not stub-only); else this skill + user/repo ADR templates |
+| Host / multi-profile config or gateway apply | this skill + host-ops specialist when installed + domain specialist |
+| Technical failure / regression fix | this skill + `systematic-debugging` before proposing the fix |
+
+### Approval language
+
+- A **conditional** choice (“Accept only after revise”, “after X then Y”) is **not** authority to perform the intermediate mutate unless that option’s text is a **fully determined apply/revise-now** action (see `interactive-decision-gates` when installed).
+- Prefer separate option IDs: e.g. **R** = revise these artifacts now · **A** = Accept revised design · **H** = hold.
 
 ### Done when
 
 - [ ] For standard/high-blast apply: this skill was loaded on the **apply turn** before the first mutating command
-- [ ] Specialist (if any) loaded in addition, not instead
+- [ ] Specialist (if any) loaded in addition, not instead — **real** target, not stub-only
 - [ ] Prior “we loaded SOP at kickoff” was **not** used to skip re-entry after a phase change
+- [ ] Handoff resume/park/write: this skill + continuity skill loaded on the **entry turn** before acting on the charter (**when** a continuity skill is installed)
+- [ ] ADR/design mutate: this skill loaded on the **mutate turn**; `it-architect` also loaded **when installed**
+- [ ] Conditional menu picks were not treated as revise/apply authority unless fully determined
 
 ## Investigate before asking
 
@@ -129,9 +155,9 @@ Use the concise gate plus the following:
 
 1. **Risk and trust boundaries** — data classification, permissions, secrets, PII, network/egress, third parties, affected users/systems, and failure modes.
 2. **Change safety** — backup, dry-run, staging, rollout, monitoring, rollback, recovery, or revocation strategy as applicable.
-3. **Durable decision artifact** — ask whether an ADR is wanted for a new project or non-trivial technical decision; load `it-architect` (or your architecture skill) where its triggers apply.
+3. **Durable decision artifact** — ask whether an ADR is wanted for a new project or non-trivial technical decision; load `it-architect` **when installed** where its triggers apply.
 4. **Explicit exclusions** — what is not being changed and what risk remains after the work.
-5. **Decision gate** — present fully determined, ranked options when user choice is needed; load `interactive-decision-gates` if installed, otherwise keep full option text in the body as ranked 1/2/3.
+5. **Decision gate** — present fully determined, ranked options when user choice is needed; load `interactive-decision-gates` **when installed** for the menu contract (otherwise keep full option text in the message body).
 
 **Done when:** the proposed action, safety controls, rollback posture, owner decisions, and remaining risk are all visible before execution.
 
@@ -144,13 +170,11 @@ Use the concise gate plus the following:
 - If new evidence materially changes one of those things, stop, explain the changed fact and impact, recommend a revised path, and wait for the necessary decision.
 - Internal implementation adjustments may proceed without a new gate only when they preserve the approved outcome and acceptance criteria, do not increase risk or scope, and are disclosed in the final report.
 
-For long-running or multi-surface work, preserve the accepted gate and current status through your established handoff or session-continuity procedure (if any). Continuity mechanics are owned by those tools/skills, not by this SOP.
+For long-running or multi-surface work, preserve the accepted gate and current status through the established handoff procedure. The continuity mechanism is owned by the install’s handoff/continue skills **when present**, not this skill.
 
 ## Select the specialist, do not duplicate it
 
 Load **this umbrella and** the specialist for standard/high-blast **apply** — never the specialist alone as a substitute for this skill. This SOP chooses and sequences specialists; it does not copy their procedures.
-
-Load specialists **when installed**. Names below are common Hermes/community skills; substitute local equivalents if your install differs.
 
 | Work condition | Load / follow |
 |---|---|
@@ -158,12 +182,12 @@ Load specialists **when installed**. Names below are common Hermes/community ski
 | A question needs a bounded, throwaway experiment | `spike` |
 | Technical failure or regression | `systematic-debugging` before proposing a fix |
 | New behavior, bug fix, or behavior-preserving refactor | `test-driven-development` where applicable |
-| Architecture, multi-system, security, data, or durable technical decision | `it-architect` (also in this monorepo when using ATtheGR8/hermes-agent-skills) |
-| User must choose among ranked paths | `interactive-decision-gates` if available; otherwise full ranked 1/2/3 text in the body |
-| Heavy implementation with separable tasks | `subagent-driven-development` and/or your delegation skill |
-| Host / multi-profile product ops | your ops skill plus the relevant specialist (not this umbrella alone) |
+| Architecture, multi-system, security, data, or durable technical decision | `it-architect` **when installed** (+ this umbrella; not an ADR stub alone) |
+| User must choose among ranked paths | `interactive-decision-gates` when installed (+ this umbrella on apply of the chosen path) |
+| Heavy implementation with separable tasks | `subagent-driven-development` and/or install delegation skills |
+| Host / multi-profile estate operation | host-ops specialist when installed + domain skill |
 | Pre-commit quality review | `requesting-code-review` |
-| Cross-session / cross-surface continuity | your handoff skill or written handoff file |
+| Cross-surface continuity | continuity/handoff skill when installed |
 
 ## Verification and final report
 
@@ -196,7 +220,7 @@ When work was **non-trivial** (roughly 5+ tool calls, repeated failure modes, or
 1. Capture **symptom → mitigation** while it is fresh (short; no session narrative dump).
 2. Write it into the **specialist** home (skill, estate script, runbook) — not this umbrella SOP and not MEMORY scrap.
 3. Prefer **patch existing** specialist over a new near-skill.
-4. Point only to the specialist that owns the domain (do not dump session narrative into this umbrella).
+4. Point only: write friction into the specialist that owns the surface (pending/apply, host ops, skill authoring) **when those skills are installed** — not into this umbrella.
 5. **Done when:** a future agent can hit the same class of problem and find the fix without rereading chat.
 
 Do **not** paste dated issue laundry lists into this SOP — they go stale and bloat always-on process.
@@ -258,13 +282,18 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 6. **Treating approval for a plan as approval for an altered plan.** Re-gate material drift.
 7. **Claiming done after editing without evidence.** Report actual checks and outcomes.
 8. **Replacing specialist skills with generic SOP prose.** Select the specialist; do not duplicate it.
-9. **Copying this full procedure into SOUL, USER, AGENTS, or IDEA files.** Keep this skill as the full source of truth; other layers carry only short pointers or local constraints.
-10. **Maintaining a second full copy of the SOP** outside this skill (stale forks drift). Point other docs at the skill name instead of duplicating the body.
+9. **Copying this full procedure into identity, USER, project agent-rules, or IDEA files.** Keep this skill as the full source of truth; other layers carry only short pointers or local constraints.
+10. **Maintaining a second full copy.** If a lab IDEA/charter file pointed at this skill, keep it as a short pointer after adoption; project IDEA files remain project charters.
 11. **Leaving implement friction only in chat.** Capture symptom→fix in the specialist skill/script; do not archive incident lists in this SOP.
 12. **Dumping project/session issue logs into the umbrella SOP.** Wrong layer; use handoff or specialist sustainment instead.
 13. **Treating an earlier skill load as still active after a phase change.** Design/discuss load does not cover execute/apply — re-load this skill.
 14. **Specialist-only load on apply turns.** Config/ops/debug specialists do not replace umbrella triage/gate/verify; load both.
 15. **Execute momentum skipping re-entry.** A clear “go/apply” is approval for scope — not a waiver of load/re-entry or verification.
+16. **Handoff resume/park/write without this umbrella.** Continuity or domain skills alone are not enough — pair-load this skill; handoff files are context, not authority (locks may carry; live health does not).
+17. **ADR/design mutate with stub-only or specialist-only load.** Loading an ADR stub alone (or any redirect) without this umbrella + the real architecture skill **when installed** is the same class of miss as handoff-without-umbrella.
+18. **Treating a conditional menu option as revise/apply authority.** “Accept only after revise” is a gate order, not “revise now,” unless a separate fully determined option says so.
+19. **Counting another MoA/planner/advisor skill load as this actor’s load.** Only the tool-executing agent’s load counts; re-load before first substantive tool/mutation.
+20. **Treating Next #1 in a handoff as high-blast approval.** Resume starts at focus; still gate destructive/external apply.
 
 ## Verification checklist
 
@@ -272,8 +301,10 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 - [ ] Readily available evidence was inspected before asking questions.
 - [ ] Verified facts, assumptions, and consequential unknowns are distinguished.
 - [ ] Standard/high-blast work has an appropriate gate and required approval.
-- [ ] Standard/high-blast apply: this skill re-loaded on the apply turn before first mutation (earlier session load does not count across phase change).
-- [ ] Relevant specialist skill was selected **in addition to** this umbrella when domain work needs it (not instead).
+- [ ] Standard/high-blast apply: this skill re-loaded by the **executing actor** before first mutation (earlier session/MoA peer load does not count across phase change).
+- [ ] Handoff resume/park/write: this skill + continuity skill loaded on the entry turn; handoff not treated as live authority (durable locks may carry).
+- [ ] ADR/design mutate: this skill on the mutate turn; `it-architect` **when installed** (not stub-only).
+- [ ] Relevant specialist skill was selected **in addition to** this umbrella when domain work needs it (not instead; real target if redirect).
 - [ ] Material implementation drift was re-gated; safe internal adjustments were disclosed.
 - [ ] Final report includes actual verification and acceptance status.
 - [ ] Sustainment artifacts and residual risk were considered.

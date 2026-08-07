@@ -1,7 +1,5 @@
 # IT Solutions Architect — writing bar
 
-Co-created by **ATtheGR8** & **Hermes Agent**. Copyright (c) 2026 Avery Thompson.
-
 Canonical bar for **ADRs, options analyses, implementation plans, architecture reviews,
 and decision gates**. Profession: **Solutions Architect** (IT/technical systems).
 Optional estate framing: `ea-lite.md`.
@@ -85,12 +83,12 @@ Diagrams are supporting evidence (`architecture-diagram`); **decisions in prose 
 
 ## Worked method (structure only)
 
-Patterns to emulate (method only — never paste host secrets or private IDs):
+Good internal patterns (do not paste secrets if publishing):
 
 - Tight ops ADR: tiered decisions, single transport, success policy, non-goals
 - Heavy platform ADR: live audit table, unverified table, D1–Dn, tiers, P0 protect-first, open gates
 
-Copy the **method**, not environment-specific facts, into new work.
+Copy the **method**, not host-specific facts, into new work.
 
 ## Completion criteria
 

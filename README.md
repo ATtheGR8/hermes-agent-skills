@@ -19,6 +19,7 @@ This is **not** an official Nous Research / Hermes product skill pack unless a s
 | [github-expert-writing](skills/github-expert-writing/) | Evidence-first GitHub issues, PRs, and review comments |
 | [it-architect](skills/it-architect/) | IT solutions architecture: ADRs, options, plans, reviews (+ EA-lite) |
 | [universal-agent-work-sop](skills/universal-agent-work-sop/) | Work SOP (standard operating procedures): triage, plan, act, verify, sustain |
+| [interactive-decision-gates](skills/interactive-decision-gates/) | Body-first choice menus: fully determined option IDs, ranked gates |
 | [qa-vision](skills/qa-vision/) | Agent first-pass visual QA before human review of images/UI |
 | [agent-knowledge-review](skills/agent-knowledge-review/) | Review agent skills/memory for durable retention (90-day filter) |
 | [agent-memory-budget](skills/agent-memory-budget/) | Always-on memory pressure: inventory, compress (Q1–Q3), or raise |
@@ -40,6 +41,9 @@ cp -R skills/it-architect ~/.hermes/skills/devops/it-architect
 # Work SOP = standard operating procedures (triage / gates / verify)
 cp -R skills/universal-agent-work-sop ~/.hermes/skills/devops/universal-agent-work-sop
 
+# Choice menus / decision gates
+cp -R skills/interactive-decision-gates ~/.hermes/skills/devops/interactive-decision-gates
+
 # Agent first-pass visual QA
 cp -R skills/qa-vision ~/.hermes/skills/software-development/qa-vision
 
@@ -57,6 +61,8 @@ Restart or start a new Hermes session so the skill index picks it up. Load with:
 ```text
 skill_view(name='github-expert-writing')
 skill_view(name='universal-agent-work-sop')
+skill_view(name='it-architect')
+skill_view(name='interactive-decision-gates')
 skill_view(name='qa-vision')
 skill_view(name='agent-knowledge-review')
 skill_view(name='agent-memory-budget')
