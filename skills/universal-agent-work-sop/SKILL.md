@@ -1,7 +1,7 @@
 ---
 name: universal-agent-work-sop
 description: "Use for all agent work: triage, plan, act, verify, sustain."
-version: 1.2.6
+version: 1.2.7
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -59,6 +59,7 @@ For every material claim, recommendation, or action:
 5. **Use the best available method.** Prefer an appropriate native UI, CLI, official documentation/API, skill, tool, script, or delegated worker; do not use a method merely because it is familiar.
 6. **Verify before declaring completion.** Report actual checks and results. “Implemented” is not “complete” until agreed acceptance criteria are met or the remaining gap is explicitly accepted.
 7. **Sustain what changes.** Consider the tests, documentation, runbooks, examples, ADRs, monitoring, ownership, rollback posture, and handoff state affected by durable work.
+8. **Rank durable first.** When offering options, recommend the overall long-term/sustainable path. Cheap/narrow is a numbered alternative, not the default rec. Detail: `interactive-decision-gates` **when installed**.
 
 ## Triage before action
 
@@ -285,7 +286,7 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 2. **Using line count as the risk classifier.** One permission or deletion change can be high-blast.
 3. **Asking a question discoverable from the workspace.** Investigate first.
 4. **Calling an assumption a verified fact.** Label uncertainty plainly.
-5. **Presenting open-ended choices when a safe default exists.** Recommend a fully determined path.
+5. **Presenting open-ended choices when a safe default exists.** Recommend a fully determined path. Do **not** under-rank the durable option as optional hygiene — `interactive-decision-gates` **when installed**.
 6. **Treating approval for a plan as approval for an altered plan.** Re-gate material drift.
 7. **Claiming done after editing without evidence.** Report actual checks and outcomes.
 8. **Replacing specialist skills with generic SOP prose.** Select the specialist; do not duplicate it.
@@ -310,6 +311,7 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 - [ ] Task classified trivial, standard, or high-blast using risk rather than line count.
 - [ ] Readily available evidence was inspected before asking questions.
 - [ ] Cheap lock-changing behavior claims were probed before Accept, or marked unverified.
+- [ ] New `Dn` / design-locked claim passed the implementable-or-principle split (`it-architect` **when installed**).
 - [ ] After implement: residuals/optionals listed unprompted (must-fix vs optional; ACE, suite, docs/handoff, leftover `/tmp`; empty must-fix OK). Implement-complete blocked until that list is in the report.
 - [ ] After implement complete: next ranked existing backlog presented (not started).
 - [ ] Verified facts, assumptions, and consequential unknowns are distinguished.

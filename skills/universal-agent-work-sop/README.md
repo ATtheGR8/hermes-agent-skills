@@ -64,7 +64,7 @@ This skill is useful **alone**. Missing companions reduce specialization, not ba
 
 ## Version
 
-Public **1.2.6** (lite-on-restore / full-on-write when a continuity skill is installed).
+Public **1.2.7** (1.2.6 plus durable-first ranking and implementable-or-principle check).
 
 ## Security
 

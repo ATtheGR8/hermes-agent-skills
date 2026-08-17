@@ -18,7 +18,7 @@ This is **not** an official Nous Research / Hermes product skill pack unless a s
 |-------|-------------|
 | [github-expert-writing](skills/github-expert-writing/) | Evidence-first GitHub issues, PRs, and review comments |
 | [it-architect](skills/it-architect/) | IT solutions architecture: ADRs, options, plans, reviews (+ EA-lite) |
-| [universal-agent-work-sop](skills/universal-agent-work-sop/) | Work SOP (standard operating procedures) **1.2.6**: triage, plan, act, verify, sustain |
+| [universal-agent-work-sop](skills/universal-agent-work-sop/) | Work SOP (standard operating procedures) **1.2.7**: triage, plan, act, verify, sustain |
 | [interactive-decision-gates](skills/interactive-decision-gates/) | Body-first choice menus: fully determined option IDs, ranked gates |
 | [qa-vision](skills/qa-vision/) | Agent first-pass visual QA before human review of images/UI |
 | [agent-knowledge-review](skills/agent-knowledge-review/) | Review agent skills/memory for durable retention (90-day filter) |
