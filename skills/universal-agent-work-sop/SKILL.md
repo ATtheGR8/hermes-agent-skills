@@ -1,7 +1,7 @@
 ---
 name: universal-agent-work-sop
 description: "Use for all agent work: triage, plan, act, verify, sustain."
-version: 1.2.5
+version: 1.2.6
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -88,7 +88,9 @@ Load (or re-load) this umbrella skill **before the first substantive tool call o
 2. **Risk upgrade** — trivial → standard or high-blast; or blast radius grows mid-work
 3. **New high-blast surface** — credentials, production or shared config, multi-system rollout, irreversible data/volume changes, external side effects
 4. **Session start of material work** — standard/high-blast work when this skill has not been loaded on the **current turn**
-5. **Handoff continuity** — user says `resume` / `resume <hint>` / `resume last` / park / write handoff (or pastes a handoff path): load **this skill with** the install’s **continuity/handoff skill when installed**. A handoff is **context, not authority** for live state and new mutations; **durable locks** in the file may still carry (do not re-open without cause). Not a prior skill load. Domain specialists load **in addition**.
+5. **Handoff continuity** — user says `resume` / `resume <hint>` / `resume last` / park / write handoff (or pastes a handoff path):
+   - **Restore / picker (read-only):** load the install’s continuity **resume-lite** page **when installed** (not this full body + not the full continuity skill). Read the handoff **capsule / executive** section + focused workstream only. Handoff is **context, not authority** for live state and new mutations; **durable locks** may still carry (do not re-open without cause). Do not search prior chat unless the capsule marks a named gap.
+   - **Write / park / mutate:** load **this skill with** the install’s **continuity/handoff skill when installed** before gathering/writing or the first mutation. Domain specialists load **in addition**. Not a prior lite load.
 6. **Durable decision artifacts** — author, revise, Accept, Reject, or multi-file design package work (ADR + plan + runbook + diagrams, architecture decision, options analysis): load **this skill**; also load `it-architect` **when installed** before the first mutation. Classify at least **standard**. Prefer the real architecture skill over any ADR **stub/redirect** name. If no architecture skill is installed, keep ADR work under this SOP’s standard/high-blast gates and any templates the user provides.
 7. **Stub / redirect skills** — if the selected skill says “load X”, “absorbed into X”, or is only a redirect: load **this umbrella and the real target X** in the same turn. A stub load alone is **not** a completed specialist load.
 
@@ -103,7 +105,8 @@ Load (or re-load) this umbrella skill **before the first substantive tool call o
 
 | Entry | Load before first mutation |
 |---|---|
-| Handoff resume / park / write | this skill + continuity/handoff skill when installed (+ domain) |
+| Handoff **restore** (read-only) | continuity **resume-lite** page when installed (not this full body) |
+| Handoff write / park / mutate | this skill + continuity/handoff skill when installed (+ domain) |
 | ADR / architecture decision / multi-file design package | this skill + `it-architect` **when installed** (not stub-only); else this skill + user/repo ADR templates |
 | Host / multi-profile config or gateway apply | this skill + host-ops specialist when installed + domain specialist |
 | Technical failure / regression fix | this skill + `systematic-debugging` before proposing the fix |
@@ -118,7 +121,8 @@ Load (or re-load) this umbrella skill **before the first substantive tool call o
 - [ ] For standard/high-blast apply: this skill was loaded on the **apply turn** before the first mutating command
 - [ ] Specialist (if any) loaded in addition, not instead — **real** target, not stub-only
 - [ ] Prior “we loaded SOP at kickoff” was **not** used to skip re-entry after a phase change
-- [ ] Handoff resume/park/write: this skill + continuity skill loaded on the **entry turn** before acting on the charter (**when** a continuity skill is installed)
+- [ ] Handoff **restore**: resume-lite loaded **when installed**; full pair-load not required until write/mutate
+- [ ] Handoff write/park/mutate: this skill + continuity skill loaded on the **entry turn** before gather/write or first mutation (**when** a continuity skill is installed)
 - [ ] ADR/design mutate: this skill loaded on the **mutate turn**; `it-architect` also loaded **when installed**
 - [ ] Conditional menu picks were not treated as revise/apply authority unless fully determined
 
@@ -292,7 +296,7 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 13. **Treating an earlier skill load as still active after a phase change.** Design/discuss load does not cover execute/apply — re-load this skill.
 14. **Specialist-only load on apply turns.** Config/ops/debug specialists do not replace umbrella triage/gate/verify; load both.
 15. **Execute momentum skipping re-entry.** A clear “go/apply” is approval for scope — not a waiver of load/re-entry or verification.
-16. **Handoff resume/park/write without this umbrella.** Continuity or domain skills alone are not enough — pair-load this skill; handoff files are context, not authority (locks may carry; live health does not).
+16. **Handoff write/park/mutate without this umbrella.** Restore may use resume-lite when installed; write/park/mutate still pair-load this skill + the continuity skill when installed. Handoff files are context, not authority (locks may carry; live health does not).
 17. **ADR/design mutate with stub-only or specialist-only load.** Loading an ADR stub alone (or any redirect) without this umbrella + the real architecture skill **when installed** is the same class of miss as handoff-without-umbrella.
 18. **Treating a conditional menu option as revise/apply authority.** “Accept only after revise” is a gate order, not “revise now,” unless a separate fully determined option says so.
 19. **Counting another MoA/planner/advisor skill load as this actor’s load.** Only the tool-executing agent’s load counts; re-load before first substantive tool/mutation.
@@ -311,7 +315,7 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 - [ ] Verified facts, assumptions, and consequential unknowns are distinguished.
 - [ ] Standard/high-blast work has an appropriate gate and required approval.
 - [ ] Standard/high-blast apply: this skill re-loaded by the **executing actor** before first mutation (earlier session/MoA peer load does not count across phase change).
-- [ ] Handoff resume/park/write: this skill + continuity skill loaded on the entry turn; handoff not treated as live authority (durable locks may carry).
+- [ ] Handoff **restore**: resume-lite when installed; write/park/mutate still pair-loads this skill + continuity skill on the entry turn; handoff not treated as live authority (durable locks may carry).
 - [ ] ADR/design mutate: this skill on the mutate turn; `it-architect` **when installed** (not stub-only).
 - [ ] Relevant specialist skill was selected **in addition to** this umbrella when domain work needs it (not instead; real target if redirect).
 - [ ] Material implementation drift was re-gated; safe internal adjustments were disclosed.

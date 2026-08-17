@@ -58,13 +58,13 @@ Keep the full procedure in the skill — do not paste the whole SOP into USER/SO
 |---|---|
 | `it-architect` | ADR / design-package specialist pair-load |
 | `interactive-decision-gates` | Full menu contract for multi-option gates |
-| Continuity/handoff skill (any) | Resume/park/write pair-load |
+| Continuity/handoff skill (any) | Restore uses resume-lite when present; write/park/mutate still pair-load |
 
 This skill is useful **alone**. Missing companions reduce specialization, not basic triage/gate/verify.
 
 ## Version
 
-Public **1.2.5** (named residual inventory).
+Public **1.2.6** (lite-on-restore / full-on-write when a continuity skill is installed).
 
 ## Security
 
