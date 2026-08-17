@@ -1,7 +1,7 @@
 ---
 name: universal-agent-work-sop
 description: "Use for all agent work: triage, plan, act, verify, sustain."
-version: 1.2.1
+version: 1.2.4
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -132,7 +132,9 @@ Before raising a blocking question or proposing action:
 4. Identify contradictions, missing evidence, and constraints that materially affect the outcome.
 5. Ask only questions that cannot be answered safely through investigation and whose wrong answer would materially change the work.
 
-**Done when:** each question is genuinely blocking or is intentionally deferred with a stated safe default.
+**Probe before Accept.** When a design lock depends on a behavior claim that is cheap to falsify (one test, one CLI smoke, a fixture), run that probe **before** Accept or implement. Skip ceremony when the slice is docs-only or the claim is already proven. Unverified lock-changing claims stay labeled unverified until probed.
+
+**Done when:** each question is genuinely blocking or is intentionally deferred with a stated safe default. Cheap lock-changing claims were probed or explicitly marked unverified.
 
 ## Concise work gate — standard work
 
@@ -199,7 +201,8 @@ Every non-trivial task ends with a concise, evidence-backed report:
 4. **Acceptance status** — met, partially met, blocked, or explicitly deferred; never imply success when a check failed or was skipped.
 5. **Safety action** — rollout, rollback, backup, recovery, or monitoring result when applicable.
 6. **Sustainment** — docs, runbooks, examples, ADRs, tests, ownership, and handoff updates completed or deliberately deferred.
-7. **Residual risk / next step** — only when material.
+7. **Residuals / optionals** — after an **implement**, always list remaining residuals and optionals unprompted. Do not wait to be asked. Label must-fix vs optional. Docs-only Proposed writes may omit this.
+8. **Next ranked work** — when that implement is complete (residuals listed), present the next ranked list **if a backlog or board already exists**. Do not invent a new program. Rank durable first. Completion of one slice is not authority to start the next.
 
 **Done when:** every agreed acceptance criterion is accounted for with evidence or an explicit exception accepted by the user.
 
@@ -294,11 +297,17 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 18. **Treating a conditional menu option as revise/apply authority.** “Accept only after revise” is a gate order, not “revise now,” unless a separate fully determined option says so.
 19. **Counting another MoA/planner/advisor skill load as this actor’s load.** Only the tool-executing agent’s load counts; re-load before first substantive tool/mutation.
 20. **Treating Next #1 in a handoff as high-blast approval.** Resume starts at focus; still gate destructive/external apply.
+21. **Accepting a behavior lock from code-reading only** when an isolated probe was cheap and would have changed the lock.
+22. **Waiting to be asked for residuals** after implement. List them in the final report.
+23. **Ending a completed implement without the next ranked list** when a backlog already exists. Present it; do not start it.
 
 ## Verification checklist
 
 - [ ] Task classified trivial, standard, or high-blast using risk rather than line count.
 - [ ] Readily available evidence was inspected before asking questions.
+- [ ] Cheap lock-changing behavior claims were probed before Accept, or marked unverified.
+- [ ] After implement: residuals/optionals listed unprompted (must-fix vs optional).
+- [ ] After implement complete: next ranked existing backlog presented (not started).
 - [ ] Verified facts, assumptions, and consequential unknowns are distinguished.
 - [ ] Standard/high-blast work has an appropriate gate and required approval.
 - [ ] Standard/high-blast apply: this skill re-loaded by the **executing actor** before first mutation (earlier session/MoA peer load does not count across phase change).
