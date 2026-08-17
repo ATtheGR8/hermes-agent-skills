@@ -64,7 +64,7 @@ This skill is useful **alone**. Missing companions reduce specialization, not ba
 
 ## Version
 
-Public **1.2.4** (probe before Accept; residuals unprompted; next ranked backlog when one exists).
+Public **1.2.5** (named residual inventory).
 
 ## Security
 

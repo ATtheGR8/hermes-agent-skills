@@ -1,7 +1,7 @@
 ---
 name: universal-agent-work-sop
 description: "Use for all agent work: triage, plan, act, verify, sustain."
-version: 1.2.4
+version: 1.2.5
 author: ATtheGR8 & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -201,7 +201,7 @@ Every non-trivial task ends with a concise, evidence-backed report:
 4. **Acceptance status** — met, partially met, blocked, or explicitly deferred; never imply success when a check failed or was skipped.
 5. **Safety action** — rollout, rollback, backup, recovery, or monitoring result when applicable.
 6. **Sustainment** — docs, runbooks, examples, ADRs, tests, ownership, and handoff updates completed or deliberately deferred.
-7. **Residuals / optionals** — after an **implement**, always list remaining residuals and optionals unprompted. Do not wait to be asked. Label must-fix vs optional. Docs-only Proposed writes may omit this.
+7. **Residuals / optionals** — after an **implement**, always list remaining residuals and optionals unprompted. Do not wait to be asked. Label must-fix vs optional. Empty must-fix is a valid pass. Inventory at least: ACE / inherit on new files; post-check suite actually run; docs/handoff updated or deferred; leftover `/tmp` (or lab) artifacts. Docs-only Proposed writes may omit this. Implement-complete is blocked until this labeled list is in the report.
 8. **Next ranked work** — when that implement is complete (residuals listed), present the next ranked list **if a backlog or board already exists**. Do not invent a new program. Rank durable first. Completion of one slice is not authority to start the next.
 
 **Done when:** every agreed acceptance criterion is accounted for with evidence or an explicit exception accepted by the user.
@@ -298,7 +298,7 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 19. **Counting another MoA/planner/advisor skill load as this actor’s load.** Only the tool-executing agent’s load counts; re-load before first substantive tool/mutation.
 20. **Treating Next #1 in a handoff as high-blast approval.** Resume starts at focus; still gate destructive/external apply.
 21. **Accepting a behavior lock from code-reading only** when an isolated probe was cheap and would have changed the lock.
-22. **Waiting to be asked for residuals** after implement. List them in the final report.
+22. **Waiting to be asked for residuals** after implement, or claiming “no residuals” without the named inventory (ACE, suite, docs/handoff, leftover `/tmp`). List must-fix vs optional in the final report.
 23. **Ending a completed implement without the next ranked list** when a backlog already exists. Present it; do not start it.
 
 ## Verification checklist
@@ -306,7 +306,7 @@ Useful indicators, only when they inform improvement: avoidable rework, research
 - [ ] Task classified trivial, standard, or high-blast using risk rather than line count.
 - [ ] Readily available evidence was inspected before asking questions.
 - [ ] Cheap lock-changing behavior claims were probed before Accept, or marked unverified.
-- [ ] After implement: residuals/optionals listed unprompted (must-fix vs optional).
+- [ ] After implement: residuals/optionals listed unprompted (must-fix vs optional; ACE, suite, docs/handoff, leftover `/tmp`; empty must-fix OK). Implement-complete blocked until that list is in the report.
 - [ ] After implement complete: next ranked existing backlog presented (not started).
 - [ ] Verified facts, assumptions, and consequential unknowns are distinguished.
 - [ ] Standard/high-blast work has an appropriate gate and required approval.
